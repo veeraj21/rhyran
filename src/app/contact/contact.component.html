@@ -1,0 +1,96 @@
+<div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <h4 class="h4">
+                    Contact us <small>Feel free to contact us</small></h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="well well-sm">
+                <form #frm="ngForm" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" [(ngModel)]="contact.contactName" ngModel #firstName="ngModel" class="form-control"
+                             id="contactName"  name="contactName"  placeholder="Enter name" required minlength="4" pattern="banana" />
+                             <div *ngIf="firstName.touched && !firstName.valid" >
+                                <div *ngIf="firstName.errors.required" > First name is required</div>
+                                <div *ngIf="firstName.errors.minlength" > Minmum length is {{firstName.errors.minlength.requiredLength}}</div>
+                                <div *ngIf="firstName.errors.pattern" > Need banana in the field</div>
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                                <input type="email" [(ngModel)]="contact.contactEmail" class="form-control" name="contactEmail" id="contactEmail" placeholder="Enter email" required="required" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">
+                                Subject</label>
+                            <select id="subject" name="subject" class="form-control" required="required" [(ngModel)]="contact.subject">
+                                <option value="na" selected="">Choose One:</option>
+                                <option value="service">General Customer Service</option>
+                                <option value="suggestions">Suggestions</option>
+                                <option value="product">Product Support</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Message</label>
+                            <textarea name="message" [(ngModel)]="contact.message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                placeholder="Message"></textarea>                               
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary pull-right" id="btnContactUs" (click)="addContact()">Send Message</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <form>
+            <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
+            <address>
+                <strong>RHYRAN CONSULTING LLC</strong><br>
+                Canary Dr<br>
+                Edison NJ, New Jersey 08820<br>
+                <abbr title="Phone">
+                    P:</abbr>+1 (732)-540-1488
+            </address>
+            <address>
+                <strong>Email Contact</strong><br>
+                <a href="mailto:#">info@rhyranconsulting.com</a>
+            </address>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="_adminUser">
+<p>Contact List </p>
+   <table class="table table-bordered">
+    <tr>
+     <th>Contact Name</th><th>Contact Email</th><th>Subject</th><th>Message</th><th>CreatedAt</th><th>Action</th>
+    </tr>   
+    <tr *ngFor="let item of contacts | async"> 
+    <td>{{item.contactName}}</td>
+    <td>{{item.contactEmail}}</td>
+    <td>{{item.subject}}</td>
+    <td>{{item.message}}</td>
+    <td>{{item.createdAt | date:'yMMMd'}}</td>
+    <td><a (click)="deleteEvent(item.$key)">Delete</a></td>
+
+    </tr>
+   </table>
+
+
+<div>

@@ -1,0 +1,79 @@
+<h2 [textContent]="title"></h2>
+<div class="container-fluid bg-3 text-center">    
+  <div class="row">
+    <div class="col-sm-2">
+      <img src="assets/images/bannerimage.png" alt="Image" width="350" height="300">
+    </div>    
+  </div>
+</div>
+
+<p>
+ Rhyran Consulting is a global provider of application development and  IT Consulting. 
+</p>
+<p myHighlight [highlightColor]="'orange'">
+Application Development:
+
+Our philosophy is to support and nurture our clients from the very beginning of the project till the end and deliver the project not only in the scope, time and cost but also with complete customer satisfaction.
+We deliver a measurable delta in productivity, profitability, and share holder value to the worlds leading companies. Our methodology enables our clients to lower the total cost of ownership and meet their business objectives.
+
+</p>
+<p myHighlight>
+
+IT Consulting:
+
+Our search process  identify the best talent and does not depend singularly on internet candidates. We prescreen our resources  to figure out precisely what their profession objectives are, which helps us coordinate them to the individual employer’s requirements.
+We only present you with qualified profile that we feel will be a decent match for your openings. We do  reference check, counter offer counseling, applicant questions, and a new hire follow up. Our objective is to increase candidate retention for you and to build a long term relationship as a business partner.
+</p>
+
+<h4>Pick a highlight color</h4>
+<div>
+  <input type="radio" name="colors" (click)="color='lightgreen'">Green
+  <input type="radio" name="colors" (click)="color='yellow'">Yellow
+  <input type="radio" name="colors" (click)="color='cyan'">Cyan
+</div>
+<p myHighlight [highlightColor]="color">Highlight me!</p>
+<div (keyup.enter)="checkPropagation()">
+    Template Variable: <input #checkVal (keyup.enter)="checkValue(checkVal.value, $event)"/>
+
+    Component Variable: <input [value]="email" (keyup.enter)="comVariable()"/>
+
+    Component Variable: <input [(ngModel)]="email" (keyup.enter)="twoWayBinding()"/>
+    
+    {{email | summary}}
+
+    {{'welcosdsdsdsdnsdsd' | summary:8}}
+</div>
+<favorite [isfavorite]="post.favorite" [checkFavorite] = "!post.favorite" (facChangeEvent)="favoriteChanged($event)"></favorite>
+
+<input type="text" [appAppInputFormat]="'uppercase'">
+<label for=""></label><input type="text">
+
+<form [formGroup]="formRective" (ngSubmit)="log()">
+    <div *ngIf="formRective.errors" class="alert alert-danger">Invalid values</div>
+
+
+  <div class="form-group">
+    <label for="name">First Name</label>
+    <input type="text" class="form-control" formControlName="firstName"  name="firstName">
+    <div *ngIf="firstName.touched && firstName.invalid" class="alert alert-danger">
+      <div *ngIf="firstName.required">FirstName is required</div>      
+    </div>
+   </div>
+   <div class="form-group">
+    <label for="name">Last Name</label>
+    <input type="text" ngModel class="form-control" id="lastName"  formControlName="lastName">
+    <div *ngIf="formRectiveInput('lastName').pending">checking last name</div>
+    {{formRectiveInput('lastName').errors | json}}
+    <div *ngIf="formRectiveInput('lastName').touched && formRectiveInput('lastName').invalid" class="alert alert-danger">
+      <div *ngIf="formRectiveInput('lastName').errors.shouldBeUnique">already in use</div>
+     
+      <div *ngIf="formRectiveInput('lastName').errors.minlength">minlength is {{formRectiveInput('lastName').errors.minlength.requiredLength}}</div>
+    </div>
+   </div>
+   <button class="btn btn-primary">Submit</button>     
+</form>
+
+
+
+
+

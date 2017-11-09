@@ -1,0 +1,17 @@
+<a [routerLink]="['/jobDetails', -1]"> <button type="button" class="btn btn-primary pull-left" id="btnContactUs">Create Job</button></a>
+<br>
+<table class="table table-bordered">
+ <tr>
+  <th>Job Name</th><th>Contact Email</th><th>Subject</th><th>Created On</th><th>Action</th>
+ </tr>   
+ <tr *ngFor="let item of jobs | async"> 
+ <td>{{item.jobTitle}}</td>
+ <td>{{item.jobLocation}}</td>
+ <td>{{item.contactEmail}}</td> 
+ <td>{{item.createdAt | date:'yMMMd'}}</td>
+ <td>
+    <a [routerLink]="['/jobDetails', item.$key]"><span>Details</span></a>
+    <a (click)="deleteJob(item.$key)">Delete</a>
+</td>
+ </tr>
+</table>
