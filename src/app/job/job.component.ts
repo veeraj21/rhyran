@@ -5,7 +5,6 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import {Job} from './job'
 import {JobService} from './job.service'
 
-
 @Component({
   selector: 'app-job',
   templateUrl: './job.component.html',
@@ -13,11 +12,10 @@ import {JobService} from './job.service'
 })
 export class JobComponent implements OnInit {
   jobs : FirebaseListObservable<any[]>;
-  
   constructor(private _service: JobService,  private afAuth:AngularFireAuth ,  private router:Router) { }
 
   ngOnInit() {
-    this.getJobs();   
+    this.getJobs();       
   }
 
   getJobs(){

@@ -12,5 +12,6 @@ export class Consultant {
     company:string;    
     travel:string;
     createdBy:string;
+    active:string='A';
     createdAt = (new Date()).toString();
 }

@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import {Consultant} from './consultant'
 import {ConsultantService} from './consultant.service'
+import { Subject } from 'rxjs/Subject'
 
 @Component({
   selector: 'app-consultant',
@@ -13,17 +14,22 @@ import {ConsultantService} from './consultant.service'
 })
 export class ConsultantComponent implements OnInit {
   consultant : Consultant = new Consultant();
-  consultants : FirebaseListObservable<any[]>;
+  consultants : any[];
   _adminUser : boolean= false;
+  searchType:string="fullName";
+  searchValue:string="";
+  startAt = new Subject();
+  endAt = new Subject();
   constructor(private _service: ConsultantService,private afAuth:AngularFireAuth ,  private router:Router) { }
-
   
   ngOnInit() {
     this.getConsultants();
   }
   
   getConsultants(){
-    this.consultants = this._service.getConsultants();
+    this._service.getConsultants().subscribe((snaps) => {
+      this.consultants = snaps;
+      });
   }
 
   createConsultant(){
@@ -33,7 +39,22 @@ export class ConsultantComponent implements OnInit {
   }
 
    deleteConsultant(key){
-     this._service.deleteConsultant(key)
+     this._service.deleteConsultant(key);    
    }
+
+   searchConsultant(){       
+     if(this.searchValue.length <1){
+        this.getConsultants();
+     }else{
+      this.startAt.next(this.searchValue);
+      this.endAt.next(this.searchValue+"\uf8ff");
+        this._service.searchConsultant(this.searchType,this.startAt,this.endAt).
+                 subscribe(consultants => { 
+                   console.log("Got the Results");
+                   this.consultants = consultants;
+                   consultants.forEach(item =>  console.log("check<<<<<<<<"+item.fullName));                   
+                  });
+      }     
+    }  
 
 }

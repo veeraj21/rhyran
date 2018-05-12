@@ -9,6 +9,7 @@ import { ServicesComponent } from './services/services.component';
 import { JobComponent } from './job/job.component';
 import { JobDetailComponent } from './job/job.detail.component';
 import { ConsultantComponent } from './consultant/consultant.component';
+import { ConsultantDetailComponent } from './consultant/consultant.detail.component';
 
 export const router: Routes = [  
 { path:'',redirectTo:'/home', pathMatch: 'full'},
@@ -19,6 +20,7 @@ export const router: Routes = [
 { path:'jobs',component:JobComponent},
 { path: "jobDetails/:id", component: JobDetailComponent},
 { path:'consultants',component:ConsultantComponent},
+{ path: "consultantDetails/:id", component: ConsultantDetailComponent},
 { path:'reviews',component:ReviewsComponent},
 { path:'login', component:LoginComponent},
 { path:'logout', component:LoginComponent}

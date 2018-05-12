@@ -17,6 +17,7 @@ export class Job {
     jobTravel:string;
     contactEmail:string;
     createdBy:string;
-    consultants : Consultant[]
+    active:boolean=true;
+    consultants : Array<string> = new Array(); 
     createdAt = (new Date()).toString(); 
 }

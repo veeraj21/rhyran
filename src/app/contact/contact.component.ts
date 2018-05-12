@@ -16,7 +16,7 @@ export class ContactComponent implements OnInit {
   contacts : FirebaseListObservable<any[]>;
   _adminUser : boolean= false;
    private isOpen:boolean = false;
-  constructor(private _service: ContactService,private afAuth:AngularFireAuth ,  private router:Router) { 
+  constructor(private _service: ContactService, private afAuth:AngularFireAuth ,  private router:Router) { 
     this.afAuth.authState.subscribe(
         auth => {
             if(auth){

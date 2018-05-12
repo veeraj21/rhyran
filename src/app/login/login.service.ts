@@ -13,8 +13,9 @@ export class LoginService {
      signup(email,password){
          this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
         (success) => {
+          localStorage.setItem("auth.email",email);
         this.router.navigate(['/home']);
-      }).catch(
+       }).catch(
         (err) => {
         console.log(err.message);
       })       
